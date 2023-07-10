@@ -3,6 +3,7 @@ import { FeedbackOptions } from './FeedbackOptions/FeedbackOptions';
 import { Notification } from './Notification/Notification';
 import { Section } from './Section/Section';
 import { Statistics } from './Statistics/Statistics';
+import Container from './App.styled';
 
 export class App extends Component {
   state = {
@@ -30,41 +31,33 @@ export class App extends Component {
 
   render() {
     return (
-      <div
-        style={{
-          height: '100vh',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'center',
-          fontSize: 40,
-          color: '#010101',
-        }}
-      >
-        <div>
-          <Section title="Please leave a feedback">
-            <FeedbackOptions
-              options={Object.keys(this.state)}
-              onLeaveFeedback={this.onLeaveFeedback}
-            />
-          </Section>
+      <Container>
+        <Section
+          title="Please leave a feedback"
+          fontWeight="600"
+          marginbottom="10px"
+        >
+          <FeedbackOptions
+            options={Object.keys(this.state)}
+            onLeaveFeedback={this.onLeaveFeedback}
+          />
+        </Section>
 
-          <Section title="Statistics">
-            {!Boolean(this.countTotalFeedback()) && (
-              <Notification message="There is no feedback" />
-            )}
-            {Boolean(this.countTotalFeedback()) && (
-              <Statistics
-                good={this.state.good}
-                neutral={this.state.neutral}
-                bad={this.state.bad}
-                total={this.countTotalFeedback()}
-                positivePercentage={this.countPositiveFeedbackPercentage()}
-              />
-            )}
-          </Section>
-        </div>
-      </div>
+        <Section title="Statistics" fontWeight="100" marginbottom="0px">
+          {!Boolean(this.countTotalFeedback()) && (
+            <Notification message="There is no feedback" />
+          )}
+          {Boolean(this.countTotalFeedback()) && (
+            <Statistics
+              good={this.state.good}
+              neutral={this.state.neutral}
+              bad={this.state.bad}
+              total={this.countTotalFeedback()}
+              positivePercentage={this.countPositiveFeedbackPercentage()}
+            />
+          )}
+        </Section>
+      </Container>
     );
   }
 }

@@ -1,17 +1,35 @@
+import PropTypes from 'prop-types';
+import { ButtonsFeedback, Button } from './FeedbackOptions.styled';
+import { ImHappy, ImWondering, ImAngry } from 'react-icons/im';
+
+const icons = [
+  <ImHappy style={{ color: 'green' }} />,
+  <ImWondering style={{ color: 'rgba(34, 193, 195, 1)' }} />,
+  <ImAngry style={{ color: 'red' }} />,
+];
+
 export const FeedbackOptions = ({ options, onLeaveFeedback }) => {
   return (
     <div>
-      <ul>
-        {options.map(option => {
+      <ButtonsFeedback>
+        {options.map((option, idx) => {
           return (
             <li key={option}>
-              <button type="button" onClick={() => onLeaveFeedback(option)}>
-                {option}
-              </button>
+              <Button type="button" onClick={() => onLeaveFeedback(option)}>
+                <>
+                  {icons[idx]}
+                  {option}
+                </>
+              </Button>
             </li>
           );
         })}
-      </ul>
+      </ButtonsFeedback>
     </div>
   );
+};
+
+FeedbackOptions.prototype = {
+  options: PropTypes.arrayOf(PropTypes.string).isRequired,
+  onLeaveFeedback: PropTypes.func.isRequired,
 };
