@@ -35,7 +35,7 @@ export class App extends Component {
         <Section
           title="Please leave a feedback"
           fontWeight="600"
-          marginbottom="10px"
+          marginBottom="10px"
         >
           <FeedbackOptions
             options={Object.keys(this.state)}
@@ -43,7 +43,7 @@ export class App extends Component {
           />
         </Section>
 
-        <Section title="Statistics" fontWeight="100" marginbottom="0px">
+        <Section title="Statistics" fontWeight="100">
           {!Boolean(this.countTotalFeedback()) && (
             <Notification message="There is no feedback" />
           )}
