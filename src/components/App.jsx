@@ -14,11 +14,10 @@ export class App extends Component {
 
   // This method count total sum of feedbacks
   countTotalFeedback() {
-    let total = 0;
-    for (let [, value] of Object.entries(this.state)) {
-      total += Number(value);
-    }
-    return total;
+    return Object.values(this.state).reduce(
+      (total, stateValue) => total + stateValue,
+      0
+    );
   }
   // this method percentage of positive feedbacks
   countPositiveFeedbackPercentage() {
@@ -44,10 +43,7 @@ export class App extends Component {
         </Section>
 
         <Section title="Statistics" fontWeight="100">
-          {!Boolean(this.countTotalFeedback()) && (
-            <Notification message="There is no feedback" />
-          )}
-          {Boolean(this.countTotalFeedback()) && (
+          {Boolean(this.countTotalFeedback()) ? (
             <Statistics
               good={this.state.good}
               neutral={this.state.neutral}
@@ -55,6 +51,8 @@ export class App extends Component {
               total={this.countTotalFeedback()}
               positivePercentage={this.countPositiveFeedbackPercentage()}
             />
+          ) : (
+            <Notification message="There is no feedback" />
           )}
         </Section>
       </Container>
